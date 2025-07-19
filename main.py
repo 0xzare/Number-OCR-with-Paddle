@@ -33,7 +33,6 @@ def process_single_image(image_path):
         for res in ocr_img[0]:
             box, (text, confidence) = res
             result.append(text)
-        print("**" * 50, "RESULT: ", result)
         phone_number, serial_number = find_numeric_elements(result)
 
         return phone_number, serial_number, "Success"
@@ -157,7 +156,12 @@ def main():
 
     # Start processing
     print(f"\nStarting image processing from folder: {os.path.abspath(folder_path)}")
+    import time
+
+    time1 = time.time()
     process_images_from_folder(folder_path, output_path)
+    time2 = time.time()
+    print("Calculation Time:", time2 - time1)
 
 
 if __name__ == "__main__":
