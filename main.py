@@ -4,7 +4,7 @@ import glob
 from datetime import datetime
 from paddleocr import PaddleOCR
 
-ocr = PaddleOCR(lang="en")
+ocr = PaddleOCR(lang="en", device="gpu:0", use_angle_cls=True)
 
 
 def find_numeric_elements(arr):
@@ -28,9 +28,12 @@ def find_numeric_elements(arr):
 def process_single_image(image_path):
     """پردازش یک تصویر و استخراج شماره تلفن و سریال"""
     try:
-        ocr_img = ocr.predict(image_path)
-        for res in ocr_img:
-            result = res["rec_texts"]
+        ocr_img = ocr.ocr(image_path, cls=True)
+        result = []
+        for res in ocr_img[0]:
+            box, (text, confidence) = res
+            result.append(text)
+        print("**" * 50, "RESULT: ", result)
         phone_number, serial_number = find_numeric_elements(result)
 
         return phone_number, serial_number, "Success"

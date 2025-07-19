@@ -1,2 +1,2 @@
-paddleocr
-paddlepaddle
+paddleocr==2.10.0
+paddlepaddle-gpu==2.6.2
