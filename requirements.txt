@@ -1,2 +1,8 @@
 paddleocr==2.10.0
+
+# GPU build (requires CUDA). For CPU-only machines, replace with:
+#   paddlepaddle==2.6.2
 paddlepaddle-gpu==2.6.2
+
+pandas>=2.0
+openpyxl>=3.1
